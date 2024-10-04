@@ -12,6 +12,7 @@ int main() {
     double* C1 = new double[N * N];
     double* C2 = new double[N * N];
     double* C3 = new double[N * N];
+    double* C4 = new double[N * N];
 
     // Initialize the random number generator
     std::srand(static_cast<unsigned int>(std::time(0)));
@@ -40,23 +41,33 @@ int main() {
     auto end3 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> duration3 = end3 - start3;
 
+    // Measure the time for mmul4
+    auto start4 = std::chrono::high_resolution_clock::now();
+    mmul3(A, B, C4, N);
+    auto end4 = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration4 = end4 - start4;
+
+
     // Print results
     std::cout << N << std::endl;
     std::cout << duration1.count() << std::endl;
     std::cout << duration2.count() << std::endl;
     std::cout << duration3.count() << std::endl;
+    std::cout << duration4.count() << std::endl;
 
     // Print the last element of C to confirm correctness
     std::cout << C1[N * N - 1] << std::endl;
     std::cout << C2[N * N - 1] << std::endl;
     std::cout << C3[N * N - 1] << std::endl;
-
+    std::cout << C4[N * N - 1] << std::endl;
+    
     // Release dynamically allocated memory
     delete[] A;
     delete[] B;
     delete[] C1;
     delete[] C2;
     delete[] C3;
+    delete[] C4;
 
     return 0;
 }
